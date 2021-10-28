@@ -16,6 +16,7 @@ export default class FirebaseImage extends React.Component {
         <FirebaseImage
           src={'planets/temp/planet_' + this.props.index + '.png'}
           height={h}
+          width={h}
         />
         {this.props.hasUser ||
         (this.props.selected && this.props.processing) ? (

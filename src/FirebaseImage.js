@@ -15,7 +15,23 @@ export default class FirebaseImage extends React.Component {
   render() {
     let src = this.state.src;
     return (
-      <img src={src} height={this.props.height} style={this.props.style} />
+      <div
+        style={{
+          height: this.props.height + 'px',
+          width: this.props.width + 'px',
+          position: 'relative',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div className="loader" />
+        <img
+          src={src}
+          height={this.props.height}
+          width={this.props.width}
+          style={this.props.style}
+        />
+      </div>
     );
   }
 }

@@ -166,3 +166,34 @@ button:active {
   margin: 6px 4px;
   font-size: 14pt;
 }
+
+.locationPicker:disabled {
+  transform: scale(1);
+  background: none;
+  box-shadow: none;
+  cursor: inherit;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  width: 30px;
+  height: 30px;
+  outline: 1px solid white;
+  border-radius: 50%;
+  opacity: 1;
+  z-index: -1;
+  animation-name: spin;
+  animation-duration: 0.5s;
+  background-image: conic-gradient(#fff0, #fff);
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  box-shadow: 0 0 16px #fff;
+}

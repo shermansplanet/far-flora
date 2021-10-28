@@ -40,6 +40,7 @@ export default class OrbitLayout extends React.Component {
       let y = this.props.currentData.locations['point_' + i + '_y'];
       locationPoints.push(
         <button
+          disabled={!hasUser}
           onClick={() => this.selectLocation(ci)}
           key={'point_' + i}
           className="locationPicker"
@@ -87,6 +88,7 @@ export default class OrbitLayout extends React.Component {
           <FirebaseImage
             src={'planets/' + this.props.currentData.currentPlanet + '/map.png'}
             height={h}
+            width={w}
             style={{ borderRadius: '10px' }}
           />
           {locationPoints}
@@ -94,6 +96,7 @@ export default class OrbitLayout extends React.Component {
         {processing ? null : (
           <div style={{ alignItems: 'center', margin: '8px' }}>
             <button
+              disabled={!hasUser}
               onClick={() => this.selectLocation(0)}
               className="locationPicker"
               style={{ position: 'static', margin: '4px' }}
