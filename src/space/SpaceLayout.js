@@ -12,6 +12,7 @@ export default class SpaceLayout extends React.Component {
   selectPlanet = (i) => {
     updateDoc(doc(this.db, 'users', this.props.user.uid), {
       choice: this.props.user?.choice == i ? -1 : i,
+      updateTime: this.props.currentData.lastUpdateTime,
     });
   };
 
