@@ -1,20 +1,26 @@
 import React from 'react';
 import './style.css';
-import { initializeApp } from 'firebase/app';
+import FirebaseImage from './FirebaseImage';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-const firebaseApp = initializeApp({
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+
+const config = {
   apiKey: 'AIzaSyBtJKxBqyLefYsVKIqOb-ln96cNQXW00vA',
   authDomain: 'star-yonder.firebaseapp.com',
   projectId: 'star-yonder',
-});
+  storageBucket: 'star-yonder.appspot.com',
+};
+
+let firebaseApp;
+if (!getApps().length) {
+  firebaseApp = initializeApp(config);
+} else {
+  firebaseApp = getApp();
+}
 
 const db = getFirestore();
 
 export default function App() {
-  return (
-    <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
-    </div>
-  );
+  return <FirebaseImage src="planets/temp/planet_0.png" />;
 }
