@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
-import PlanetButton from './space/PlanetButton';
 import BaseSite from './BaseSite';
+
 import { initializeApp, getApps, getApp } from 'firebase/app';
 
 const config = {
@@ -21,27 +21,4 @@ if (!getApps().length) {
 
 export default function App() {
   return <BaseSite />;
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        justifyContent: 'center',
-      }}
-    >
-      <div style={{ flexDirection: 'column' }}>
-        <div>
-          <PlanetButton index={0} />
-          <PlanetButton index={1} />
-          <PlanetButton index={2} />
-        </div>
-        <div>
-          <PlanetButton index={3} />
-          <PlanetButton index={4} />
-          <PlanetButton index={5} />
-        </div>
-      </div>
-    </div>
-  );
 }

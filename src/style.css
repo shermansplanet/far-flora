@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;1,300;1,400&family=Share+Tech+Mono&display=swap');
+
 :root {
   --light: #4bf;
   --dark: #048;
   padding: 0px;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 body {
@@ -24,7 +27,7 @@ div {
   position: absolute;
   left: 0;
   right: 0;
-  justify-content: 'center';
+  justify-content: center;
   align-items: center;
   flex-direction: column;
 }
@@ -97,6 +100,35 @@ button:active {
   transform: none;
 }
 
-.errorText     {
+.errorText {
   color: #f88;
+}
+
+.bigText {
+  color: white;
+  margin: 20px;
+  font-size: 18pt;
+}
+
+.planetButton {
+  transition-duration: 0.2s;
+  background: none;
+  margin: none;
+  border: 3px solid white;
+  border-radius: 100%;
+  transform: translate(0px, -3.7px) scale(0.88);
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.planetButton:hover {
+  background: none;
+  transform: translate(0px, -3.7px) scale(0.88);
+  color: white;
+}
+
+.planetButton:active {
+  transition-duration: 0s;
+  background: #fff3;
 }

@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from 'firebase/auth';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -42,9 +43,16 @@ export default class Main extends React.Component {
       this.auth,
       this.state.email,
       this.state.password
-    ).catch((error) => {
-      this.setState({ error: error.message, clicked: false });
-    });
+    )
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setDoc(doc(getFirestore(), 'users', user.uid), {
+          choice: -1,
+        });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message, clicked: false });
+      });
   };
 
   reset = () => {
