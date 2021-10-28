@@ -113,22 +113,56 @@ button:active {
 .planetButton {
   transition-duration: 0.2s;
   background: none;
-  margin: none;
+  margin: 0;
   border: 3px solid white;
   border-radius: 100%;
-  transform: translate(0px, -3.7px) scale(0.88);
+  transform: scale(0.94);
   justify-content: center;
   align-items: center;
   color: white;
+  z-index: 1;
 }
 
 .planetButton:hover {
   background: none;
-  transform: translate(0px, -3.7px) scale(0.88);
+  transform: scale(0.88);
   color: white;
 }
 
 .planetButton:active {
   transition-duration: 0s;
+  transform: scale(0.86);
   background: #fff3;
+}
+
+.locationPicker {
+  transition-duration: 0.1s;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: -10px;
+  border-radius: 100%;
+  background: none;
+  outline: 1px solid white;
+  position: absolute;
+  transform: none;
+}
+
+.locationPicker:hover {
+  transform: scale(1.2);
+  background: none;
+  box-shadow: 0 0 16px #fff8;
+}
+
+.locationPicker:active {
+  transform: scale(1.1);
+  background: none;
+  box-shadow: 0 0 16px #fff;
+}
+
+.buttonLabel {
+  color: white;
+  font-family: 'Share Tech Mono', monospace;
+  margin: 6px 4px;
+  font-size: 14pt;
 }

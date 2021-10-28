@@ -17,9 +17,14 @@ export default class FirebaseImage extends React.Component {
           src={'planets/temp/planet_' + this.props.index + '.png'}
           height={h}
         />
-        {this.props.hasUser ? (
+        {this.props.hasUser ||
+        (this.props.selected && this.props.processing) ? (
           <button
-            onClick={this.props.onClick}
+            onClick={
+              !this.props.processing && this.props.hasUser
+                ? this.props.onClick
+                : () => {}
+            }
             onMouseEnter={() => this.setState({ hover: true })}
             onMouseLeave={() => this.setState({ hover: false })}
             className="planetButton"
@@ -31,6 +36,7 @@ export default class FirebaseImage extends React.Component {
               boxShadow: this.props.selected
                 ? '0 0 10px white, 0 0 80px #fff4'
                 : 'none',
+              cursor: this.props.processing ? 'inherit' : 'pointer',
             }}
           >
             <div
@@ -42,7 +48,9 @@ export default class FirebaseImage extends React.Component {
                 fontFamily: "'Share Tech Mono', monospace",
               }}
             >
-              {this.props.selected
+              {this.props.processing
+                ? 'DESTINATION'
+                : this.props.selected
                 ? this.state.hover
                   ? 'CANCEL'
                   : 'CURRENT VOTE'

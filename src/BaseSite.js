@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './account/Login';
 import SpaceLayout from './space/SpaceLayout';
+import OrbitLayout from './orbit/OrbitLayout';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot, getFirestore } from 'firebase/firestore';
 
@@ -44,13 +45,29 @@ export default class BaseSite extends React.Component {
     if (this.state.loading || this.state.currentData == null) {
       return null;
     }
+    let user = this.state.user;
+    if (
+      user != null &&
+      user.updateTime != this.state.currentData.lastUpdateTime
+    ) {
+      user.choice = -1;
+    }
     if (this.state.showLogin) {
       return <Login />;
+    }
+    if (this.state.currentData.locationType == 'ORBIT') {
+      return (
+        <OrbitLayout
+          logincb={() => this.setState({ showLogin: true })}
+          user={user}
+          currentData={this.state.currentData}
+        />
+      );
     }
     return (
       <SpaceLayout
         logincb={() => this.setState({ showLogin: true })}
-        user={this.state.user}
+        user={user}
         currentData={this.state.currentData}
       />
     );

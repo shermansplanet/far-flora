@@ -18,17 +18,29 @@ export default class SpaceLayout extends React.Component {
 
   render() {
     let hasUser = this.props.user != null;
-    let choice = hasUser ? this.props.user.choice : -1;
+    let processing = this.props.currentData.processing;
+    let choice = processing
+      ? this.props.currentData.choice
+      : hasUser
+      ? this.props.user.choice
+      : -1;
+    console.log(choice);
     return (
       <div className="centered">
-        <div className="bigText">Which planet should I visit next?</div>
+        <div className="bigText">
+          {processing
+            ? "I'm on my way, thank you for helping me decide!"
+            : 'Which planet should I visit next?'}
+        </div>
         {hasUser ? null : (
           <button
             onClick={this.props.logincb}
             className="smallButton"
             style={{ marginBottom: '24px' }}
           >
-            Log in or sign up to help me decide!
+            {processing
+              ? 'Log in or sign up to help guide my journey.'
+              : 'Log in or sign up to help me decide!'}
           </button>
         )}
         <div style={{ flexDirection: 'column' }}>
@@ -36,18 +48,21 @@ export default class SpaceLayout extends React.Component {
             <PlanetButton
               index={0}
               hasUser={hasUser}
+              processing={processing}
               selected={choice == 0}
               onClick={() => this.selectPlanet(0)}
             />
             <PlanetButton
               index={1}
               hasUser={hasUser}
+              processing={processing}
               selected={choice == 1}
               onClick={() => this.selectPlanet(1)}
             />
             <PlanetButton
               index={2}
               hasUser={hasUser}
+              processing={processing}
               selected={choice == 2}
               onClick={() => this.selectPlanet(2)}
             />
@@ -56,18 +71,21 @@ export default class SpaceLayout extends React.Component {
             <PlanetButton
               index={3}
               hasUser={hasUser}
+              processing={processing}
               selected={choice == 3}
               onClick={() => this.selectPlanet(3)}
             />
             <PlanetButton
               index={4}
               hasUser={hasUser}
+              processing={processing}
               selected={choice == 4}
               onClick={() => this.selectPlanet(4)}
             />
             <PlanetButton
               index={5}
               hasUser={hasUser}
+              processing={processing}
               selected={choice == 5}
               onClick={() => this.selectPlanet(5)}
             />
