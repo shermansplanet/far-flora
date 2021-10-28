@@ -1,15 +1,15 @@
 import React from 'react';
 import './style.css';
 import PlanetButton from './space/PlanetButton';
+import NewUser from './account/NewUser';
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 const config = {
   apiKey: 'AIzaSyBtJKxBqyLefYsVKIqOb-ln96cNQXW00vA',
   authDomain: 'star-yonder.firebaseapp.com',
   projectId: 'star-yonder',
   storageBucket: 'star-yonder.appspot.com',
+  appId: '1:49221249776:web:af2643a88fe41335e7f035',
 };
 
 let firebaseApp;
@@ -19,9 +19,8 @@ if (!getApps().length) {
   firebaseApp = getApp();
 }
 
-const db = getFirestore();
-
 export default function App() {
+  return <NewUser />;
   return (
     <div
       style={{
