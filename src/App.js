@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import PlanetButton from './space/PlanetButton';
-import Site from './Site';
+import BaseSite from './BaseSite';
 import { initializeApp, getApps, getApp } from 'firebase/app';
 
 const config = {
@@ -20,7 +20,7 @@ if (!getApps().length) {
 }
 
 export default function App() {
-  return <Site />;
+  return <BaseSite />;
   return (
     <div
       style={{

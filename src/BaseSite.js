@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './account/Login';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-export default class Site extends React.Component {
+export default class BaseSite extends React.Component {
   constructor(props) {
     super(props);
     this.state = { uid: null };
