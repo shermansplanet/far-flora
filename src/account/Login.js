@@ -1,13 +1,15 @@
 import React from 'react';
-import app from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
 
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.auth = app.auth();
-    this.db = app.firestore();
+    this.auth = getAuth();
     this.state = {
       error: '',
       email: '',
@@ -21,11 +23,13 @@ export default class Main extends React.Component {
 
   signIn = () => {
     this.setState({ clicked: true });
-    this.auth
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .catch((error) => {
-        this.setState({ error: error.message, clicked: false });
-      });
+    signInWithEmailAndPassword(
+      this.auth,
+      this.state.email,
+      this.state.password
+    ).catch((error) => {
+      this.setState({ error: error.message, clicked: false });
+    });
   };
 
   signUp = () => {
@@ -34,17 +38,18 @@ export default class Main extends React.Component {
       return;
     }
     this.setState({ clicked: true });
-    this.auth
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .catch((error) => {
-        this.setState({ error: error.message, clicked: false });
-      });
+    createUserWithEmailAndPassword(
+      this.auth,
+      this.state.email,
+      this.state.password
+    ).catch((error) => {
+      this.setState({ error: error.message, clicked: false });
+    });
   };
 
   reset = () => {
     this.setState({ clicked: true });
-    this.auth
-      .sendPasswordResetEmail(this.state.email)
+    sendPasswordResetEmail(this.auth, this.state.email)
       .then(() => {
         this.setState({
           error: 'Email sent!',
@@ -59,24 +64,9 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <div className="centered" style={{ color: 'var(--light)' }}>
-        <div className="actionTitle">Welcome to Summerfall</div>
-        <div
-          style={{
-            maxWidth: '400px',
-            marginBottom: '20px',
-            textAlign: 'center',
-            fontStyle: 'italic',
-          }}
-        >
-          Where every summer brings an unending and supernaturally verdant
-          wilderness, and every winter brings a continent-spanning cityscape
-          grown by magic. Where alchemy powers trains and witches run the local
-          cinema. Where cinder-gods and lye-beasts and wisps wander the city
-          streets.
-        </div>
+      <div className="centered">
         <form
-          className="login"
+          className="vertical panel"
           onSubmit={(e) => {
             e.preventDefault();
             (this.state.resetPassword
@@ -142,7 +132,11 @@ export default class Main extends React.Component {
           className="smallButton"
           onClick={() => {
             this.setState((prevState) => {
-              return { error: '', newUser: !prevState.newUser };
+              return {
+                error: '',
+                newUser: !prevState.newUser,
+                resetPassword: false,
+              };
             });
           }}
         >
