@@ -2,19 +2,12 @@ import React from 'react';
 import FirebaseImage from '../FirebaseImage';
 import { doc, updateDoc, getFirestore } from 'firebase/firestore';
 
-export default class OrbitLayout extends React.Component {
+export default class GroundLayout extends React.Component {
   constructor(props) {
     super(props);
     this.db = getFirestore();
     this.state = {};
   }
-
-  selectLocation = (i) => {
-    updateDoc(doc(this.db, 'users', this.props.user.uid), {
-      choice: this.props.user?.choice == i ? -1 : i,
-      updateTime: this.props.currentData.lastUpdateTime,
-    });
-  };
 
   render() {
     let hasUser = this.props.user != null;
@@ -28,50 +21,16 @@ export default class OrbitLayout extends React.Component {
     let locationPoints = [];
 
     let h = 600;
-    let w = h * 2;
-
-    for (let i = 0; i < 5; i++) {
-      const ci = i + 1;
-      let selected = choice == ci;
-      if (processing && !selected) {
-        continue;
-      }
-      let x = this.props.currentData.locations['point_' + i + '_x'];
-      let y = this.props.currentData.locations['point_' + i + '_y'];
-      locationPoints.push(
-        <button
-          disabled={!hasUser}
-          onClick={() => this.selectLocation(ci)}
-          key={'point_' + i}
-          className={processing ? 'locationPicker ping' : 'locationPicker'}
-          style={{
-            left: w * x + 'px',
-            bottom: h * y + 'px',
-          }}
-        >
-          {selected ? (
-            <div
-              style={{
-                width: '10px',
-                height: '10px',
-                background: 'white',
-                marginLeft: '5px',
-                borderRadius: '100%',
-              }}
-            />
-          ) : null}
-        </button>
-      );
-    }
+    let w = (h * 16) / 9;
 
     return (
       <div className="centered">
         <div className="bigText">
           {processing
             ? choice == 0
-              ? "I'm heading to another planet, thank you for helping me decide!"
-              : "I'm on my way, thank you for helping me decide!"
-            : 'Sensors indicate these currently viable locations. Where should I land?'}
+              ? "I'm heading back to orbit, thank you for helping me decide!"
+              : "I'm exploring this area further, thank you for helping me decide!"
+            : "Here's what I'm seeing! Should I keep exploring here?"}
         </div>
         {hasUser ? null : (
           <button
@@ -86,7 +45,9 @@ export default class OrbitLayout extends React.Component {
         )}
         <div style={{ position: 'relative' }}>
           <FirebaseImage
-            src={'planets/' + this.props.currentData.currentPlanet + '/map.png'}
+            src={
+              'locations/' + this.props.currentData.currentLocation + '/0.png'
+            }
             height={h}
             width={w}
             style={{ borderRadius: '10px' }}

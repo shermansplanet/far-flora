@@ -2,6 +2,7 @@ import React from 'react';
 import Login from './account/Login';
 import SpaceLayout from './space/SpaceLayout';
 import OrbitLayout from './orbit/OrbitLayout';
+import GroundLayout from './ground/GroundLayout';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot, getFirestore } from 'firebase/firestore';
 
@@ -54,6 +55,15 @@ export default class BaseSite extends React.Component {
     }
     if (this.state.showLogin) {
       return <Login />;
+    }
+    if (this.state.currentData.locationType == 'GROUND') {
+      return (
+        <GroundLayout
+          logincb={() => this.setState({ showLogin: true })}
+          user={user}
+          currentData={this.state.currentData}
+        />
+      );
     }
     if (this.state.currentData.locationType == 'ORBIT') {
       return (
