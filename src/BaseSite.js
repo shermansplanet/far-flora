@@ -3,6 +3,7 @@ import Login from './account/Login';
 import SpaceLayout from './space/SpaceLayout';
 import OrbitLayout from './orbit/OrbitLayout';
 import GroundLayout from './ground/GroundLayout';
+import Archive from './archive/Archive';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot, getFirestore } from 'firebase/firestore';
 
@@ -14,6 +15,7 @@ export default class BaseSite extends React.Component {
       loading: true,
       showLogin: false,
       currentData: null,
+      tab: 'FEED',
     };
     this.db = getFirestore();
 
@@ -53,33 +55,59 @@ export default class BaseSite extends React.Component {
     ) {
       user.choice = -1;
     }
+
+    let content = null;
+
+    let tab = this.state.tab;
+
     if (this.state.showLogin) {
-      return <Login />;
-    }
-    if (this.state.currentData.locationType == 'GROUND') {
-      return (
+      content = <Login />;
+    } else if (tab == 'ARCHIVE') {
+      content = <Archive />;
+    } else if (this.state.currentData.locationType == 'GROUND') {
+      content = (
         <GroundLayout
           logincb={() => this.setState({ showLogin: true })}
           user={user}
           currentData={this.state.currentData}
         />
       );
-    }
-    if (this.state.currentData.locationType == 'ORBIT') {
-      return (
+    } else if (this.state.currentData.locationType == 'ORBIT') {
+      content = (
         <OrbitLayout
           logincb={() => this.setState({ showLogin: true })}
           user={user}
           currentData={this.state.currentData}
         />
       );
+    } else {
+      content = (
+        <SpaceLayout
+          logincb={() => this.setState({ showLogin: true })}
+          user={user}
+          currentData={this.state.currentData}
+        />
+      );
     }
+
     return (
-      <SpaceLayout
-        logincb={() => this.setState({ showLogin: true })}
-        user={user}
-        currentData={this.state.currentData}
-      />
+      <div>
+        <div className="navbar">
+          <button
+            className={'tabButton ' + (tab == 'FEED' ? 'extended' : '')}
+            onClick={() => this.setState({ tab: 'FEED' })}
+          >
+            Live Feed
+          </button>
+          <button
+            className={'tabButton ' + (tab == 'ARCHIVE' ? 'extended' : '')}
+            onClick={() => this.setState({ tab: 'ARCHIVE' })}
+          >
+            Archive
+          </button>
+        </div>
+        {content}
+      </div>
     );
   }
 }

@@ -18,7 +18,7 @@ export default class FirebaseImage extends React.Component {
           height={h}
           width={h}
         />
-        {this.props.hasUser ||
+        {(this.props.hasUser && !this.props.processing) ||
         (this.props.selected && this.props.processing) ? (
           <button
             onClick={

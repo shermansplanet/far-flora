@@ -56,13 +56,18 @@ export default class GroundLayout extends React.Component {
     let h = 600;
     let w = (h * 16) / 9;
 
+    let imIndex = this.props.currentData.currentImageIndex;
+
     return (
-      <div className="centered">
+      <div className="centered" key={'image_' + imIndex}>
         <div className="bigText">
           {processing
-            ? choice == 0
-              ? "I'm heading back to orbit, thank you for helping me decide!"
-              : "I'm exploring this area further, thank you for helping me decide!"
+            ? (choice == 0
+                ? "I'm exploring this area further,"
+                : choice == 1
+                ? "I'm heading back to orbit,"
+                : "I'm heading to another planet,") +
+              ' thank you for helping me decide!'
             : "Here's what I'm seeing! Should I keep exploring here?"}
         </div>
         {hasUser ? null : (
@@ -77,7 +82,13 @@ export default class GroundLayout extends React.Component {
           </button>
         )}
         <FirebaseImage
-          src={'locations/' + this.props.currentData.currentLocation + '/0.png'}
+          src={
+            'locations/' +
+            this.props.currentData.currentLocation +
+            '/' +
+            imIndex +
+            '.png'
+          }
           height={h}
           width={w}
           style={{ borderRadius: '10px' }}
