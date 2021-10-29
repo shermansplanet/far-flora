@@ -9,6 +9,39 @@ export default class GroundLayout extends React.Component {
     this.state = {};
   }
 
+  selectOption = (i) => {
+    updateDoc(doc(this.db, 'users', this.props.user.uid), {
+      choice: this.props.user?.choice == i ? -1 : i,
+      updateTime: this.props.currentData.lastUpdateTime,
+    });
+  };
+
+  renderOption = (text, i, hasUser, choice) => {
+    return (
+      <div style={{ alignItems: 'center', margin: '8px 20px' }}>
+        <button
+          disabled={!hasUser}
+          onClick={() => this.selectOption(i)}
+          className="locationPicker"
+          style={{ position: 'static', margin: '4px' }}
+        >
+          {choice == i ? (
+            <div
+              style={{
+                width: '10px',
+                height: '10px',
+                background: 'white',
+                marginLeft: '5px',
+                borderRadius: '100%',
+              }}
+            />
+          ) : null}
+        </button>
+        <div className="buttonLabel">{text}</div>
+      </div>
+    );
+  };
+
   render() {
     let hasUser = this.props.user != null;
     let processing = this.props.currentData.processing;
@@ -43,38 +76,17 @@ export default class GroundLayout extends React.Component {
               : 'Log in or sign up to help me decide!'}
           </button>
         )}
-        <div style={{ position: 'relative' }}>
-          <FirebaseImage
-            src={
-              'locations/' + this.props.currentData.currentLocation + '/0.png'
-            }
-            height={h}
-            width={w}
-            style={{ borderRadius: '10px' }}
-          />
-          {locationPoints}
-        </div>
+        <FirebaseImage
+          src={'locations/' + this.props.currentData.currentLocation + '/0.png'}
+          height={h}
+          width={w}
+          style={{ borderRadius: '10px' }}
+        />
         {processing ? null : (
-          <div style={{ alignItems: 'center', margin: '8px' }}>
-            <button
-              disabled={!hasUser}
-              onClick={() => this.selectLocation(0)}
-              className="locationPicker"
-              style={{ position: 'static', margin: '4px' }}
-            >
-              {choice == 0 ? (
-                <div
-                  style={{
-                    width: '10px',
-                    height: '10px',
-                    background: 'white',
-                    marginLeft: '5px',
-                    borderRadius: '100%',
-                  }}
-                />
-              ) : null}
-            </button>
-            <div className="buttonLabel">Leave Planet</div>
+          <div style={{ flexDirection: 'row' }}>
+            {this.renderOption('Keep Exploring', 0, hasUser, choice)}
+            {this.renderOption('Return to Orbit', 1, hasUser, choice)}
+            {this.renderOption('Leave Planet', 2, hasUser, choice)}
           </div>
         )}
       </div>
