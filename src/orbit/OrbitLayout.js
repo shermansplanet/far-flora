@@ -26,6 +26,7 @@ export default class OrbitLayout extends React.Component {
       : -1;
 
     let locationPoints = [];
+    let previews = [];
 
     let h = 600;
     let w = h * 2;
@@ -42,7 +43,7 @@ export default class OrbitLayout extends React.Component {
         <button
           disabled={!hasUser}
           onClick={() => this.selectLocation(ci)}
-          key={'point_' + i}
+          key={'point_' + ci}
           className={processing ? 'locationPicker ping' : 'locationPicker'}
           style={{
             left: w * x + 'px',
@@ -61,6 +62,36 @@ export default class OrbitLayout extends React.Component {
             />
           ) : null}
         </button>
+      );
+    }
+
+    for (let i = 0; i < 5; i++) {
+      const ci = i + 1;
+      let selected = choice == ci;
+      if (processing && !selected) {
+        continue;
+      }
+      let x = this.props.currentData.locations['point_' + i + '_x'];
+      let y = this.props.currentData.locations['point_' + i + '_y'];
+      previews.push(
+        <div
+          style={{
+            position: 'absolute',
+            left: w * x - 40 + 'px',
+            bottom: h * y + 18 + 'px',
+          }}
+          key={'point_image_' + ci}
+        >
+          <FirebaseImage
+            src={'locations/temp/' + i + '.png'}
+            height={45}
+            width={80}
+            style={{
+              border: '1px solid white',
+              borderRadius: '5px',
+            }}
+          />
+        </div>
       );
     }
 
@@ -91,6 +122,7 @@ export default class OrbitLayout extends React.Component {
             width={w}
             style={{ borderRadius: '10px' }}
           />
+          {previews}
           {locationPoints}
         </div>
         {processing ? null : (
