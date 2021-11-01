@@ -18,13 +18,14 @@ export default class Countdown extends React.Component {
 
   render() {
     let seconds = Math.round(this.state.time / 1000);
-    const secondsPerInterval = 60 * 60 * 4;
-    let next = Math.ceil(seconds / secondsPerInterval) * secondsPerInterval;
-    seconds = next - 60 * 60 - seconds;
-
-    let shouldBeProcessing = seconds <= 0;
+    const secondsPerHour = 60 * 60;
+    let hour = Math.floor(seconds / secondsPerHour);
+    let last = this.props.currentData.lastUpdateTime;
+    let shouldBeProcessing = hour == last;
     if (shouldBeProcessing) {
-      seconds += 60 * 60;
+      seconds = (last + 1) * 60 * 60 - seconds;
+    } else {
+      seconds = (last + 4) * 60 * 60 - seconds;
     }
 
     let hours = Math.floor(seconds / (60 * 60));

@@ -101,7 +101,7 @@ export default class GroundLayout extends React.Component {
             {this.renderOption('Leave Planet', 2, hasUser, choice)}
           </div>
         )}
-        <Countdown />
+        <Countdown currentData={this.props.currentData} />
       </div>
     );
   }

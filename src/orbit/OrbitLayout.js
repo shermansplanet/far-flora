@@ -149,7 +149,7 @@ export default class OrbitLayout extends React.Component {
             <div className="buttonLabel">Leave Planet</div>
           </div>
         )}
-        <Countdown/>
+        <Countdown currentData={this.props.currentData} />
       </div>
     );
   }

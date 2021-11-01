@@ -92,7 +92,7 @@ export default class SpaceLayout extends React.Component {
             />
           </div>
         </div>
-        <Countdown/>
+        <Countdown currentData={this.props.currentData} />
       </div>
     );
   }
