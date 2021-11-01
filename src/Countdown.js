@@ -24,14 +24,14 @@ export default class Countdown extends React.Component {
 
     let shouldBeProcessing = seconds <= 0;
     if (shouldBeProcessing) {
-      seconds -= 60 * 60 * 2;
+      seconds += 60 * 60;
     }
 
     let hours = Math.floor(seconds / (60 * 60));
     seconds -= hours * (60 * 60);
 
     let minutes = Math.floor(seconds / 60);
-    seconds -= minutes * 60; 
+    seconds -= minutes * 60;
 
     return (
       <div className="countdown">
