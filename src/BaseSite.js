@@ -6,6 +6,9 @@ import GroundLayout from './ground/GroundLayout';
 import Archive from './archive/Archive';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot, getFirestore } from 'firebase/firestore';
+import { initializeApp, getApps, getApp } from 'firebase/app';
+
+import './style.css';
 
 export default class BaseSite extends React.Component {
   constructor(props) {
@@ -17,6 +20,22 @@ export default class BaseSite extends React.Component {
       currentData: null,
       tab: 'FEED',
     };
+
+    const config = {
+      apiKey: 'AIzaSyBtJKxBqyLefYsVKIqOb-ln96cNQXW00vA',
+      authDomain: 'star-yonder.firebaseapp.com',
+      projectId: 'star-yonder',
+      storageBucket: 'star-yonder.appspot.com',
+      appId: '1:49221249776:web:af2643a88fe41335e7f035',
+    };
+
+    let firebaseApp;
+    if (!getApps().length) {
+      firebaseApp = initializeApp(config);
+    } else {
+      firebaseApp = getApp();
+    }
+
     this.db = getFirestore();
 
     const auth = getAuth();

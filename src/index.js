@@ -1,6 +1,8 @@
+console.log('A');
 import React from 'react';
+console.log('B');
 import ReactDOM from 'react-dom';
-
-import App from './App';
-
-ReactDOM.render(<App />, document.getElementById('root'));
+console.log('C');
+import BaseSite from './BaseSite';
+console.log('D');
+ReactDOM.render(<BaseSite />, document.getElementById('root'));
