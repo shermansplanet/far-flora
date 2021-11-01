@@ -1,5 +1,6 @@
 import React from 'react';
 import PlanetButton from './PlanetButton';
+import Countdown from '../Countdown';
 import { doc, updateDoc, getFirestore } from 'firebase/firestore';
 
 export default class SpaceLayout extends React.Component {
@@ -91,6 +92,7 @@ export default class SpaceLayout extends React.Component {
             />
           </div>
         </div>
+        <Countdown/>
       </div>
     );
   }

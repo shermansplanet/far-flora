@@ -95,13 +95,13 @@ export default class BaseSite extends React.Component {
         <div className="navbar">
           <button
             className={'tabButton ' + (tab == 'FEED' ? 'extended' : '')}
-            onClick={() => this.setState({ tab: 'FEED' })}
+            onClick={() => this.setState({ tab: 'FEED', showLogin: false })}
           >
             Live Feed
           </button>
           <button
             className={'tabButton ' + (tab == 'ARCHIVE' ? 'extended' : '')}
-            onClick={() => this.setState({ tab: 'ARCHIVE' })}
+            onClick={() => this.setState({ tab: 'ARCHIVE', showLogin: false })}
           >
             Archive
           </button>

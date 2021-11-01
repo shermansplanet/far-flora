@@ -1,5 +1,6 @@
 import React from 'react';
 import FirebaseImage from '../FirebaseImage';
+import Countdown from '../Countdown';
 import { doc, updateDoc, getFirestore } from 'firebase/firestore';
 
 export default class OrbitLayout extends React.Component {
@@ -148,6 +149,7 @@ export default class OrbitLayout extends React.Component {
             <div className="buttonLabel">Leave Planet</div>
           </div>
         )}
+        <Countdown/>
       </div>
     );
   }

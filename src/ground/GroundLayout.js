@@ -1,5 +1,6 @@
 import React from 'react';
 import FirebaseImage from '../FirebaseImage';
+import Countdown from '../Countdown';
 import { doc, updateDoc, getFirestore } from 'firebase/firestore';
 
 export default class GroundLayout extends React.Component {
@@ -100,6 +101,7 @@ export default class GroundLayout extends React.Component {
             {this.renderOption('Leave Planet', 2, hasUser, choice)}
           </div>
         )}
+        <Countdown />
       </div>
     );
   }

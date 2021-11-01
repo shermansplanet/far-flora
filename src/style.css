@@ -105,7 +105,8 @@ button:active {
   color: #f88;
 }
 
-.bigText {
+.bigText,
+.countdown {
   color: white;
   margin: 20px;
   font-size: 18pt;
@@ -261,4 +262,35 @@ button:active {
 
 .extended {
   padding-top: 50px;
+}
+
+.archiveRow {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.imageButton,
+.imageButton:hover,
+.imageButton:active {
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  transform: none;
+  margin: 4px;
+}
+
+.magnifiedImage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.countdown {
+  font-size: 30pt;
+  font-weight: 300;
+  color: #888;
 }
