@@ -31,7 +31,7 @@ export default class Countdown extends React.Component {
     seconds -= hours * (60 * 60);
 
     let minutes = Math.floor(seconds / 60);
-    seconds -= minutes * 60;
+    seconds -= minutes * 60; 
 
     return (
       <div className="countdown">
