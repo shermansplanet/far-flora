@@ -232,7 +232,6 @@ button:active {
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   box-shadow: 0 0 16px #fff;
-  position: absolute;
 }
 
 .navbar {

@@ -25,7 +25,18 @@ export default class FirebaseImage extends React.Component {
           justifyContent: 'center',
         }}
       >
-        <div className="loader" />
+        <div
+          style={{
+            width: '0px',
+            height: '0px',
+            position: 'absolute',
+            left: '50%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <div className="loader" />
+        </div>
         <img
           src={src}
           height={this.props.height}
