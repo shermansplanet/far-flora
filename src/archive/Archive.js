@@ -20,6 +20,7 @@ export default class Archive extends React.Component {
     let archiveData = {};
     const querySnapshot = await getDocs(collection(this.db, 'planets'));
     let planets = {};
+    let idList = [];
     querySnapshot.forEach((doc) => {
       let data = doc.data();
       let locs = data.locations;
@@ -29,9 +30,12 @@ export default class Archive extends React.Component {
           return;
       }
       planets[doc.id] = doc.data();
+      idList.push(doc.id);
     });
 
-    for (let pid in planets) {
+    idList.reverse();
+
+    for (let pid of idList) {
       let planetData = {};
       for (let ii = 0; ii < planets[pid].locations.length; ii++) {
         let locid = planets[pid].locations[ii];
