@@ -90,7 +90,7 @@ export default class BaseSite extends React.Component {
     if (this.state.showLogin) {
       content = <Login />;
     } else if (tab == 'ARCHIVE') {
-      content = <Archive />;
+      content = <Archive currentData={this.state.currentData} />;
     } else if (this.state.currentData.locationType == 'GROUND') {
       content = (
         <GroundLayout

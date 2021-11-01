@@ -48,7 +48,7 @@ export default class FirebaseImage extends React.Component {
     if (this.props.magnified == undefined) return content;
     return (
       <button
-        className="imageButton"
+        className={this.state.magnified ? "imageButton" : "imageButton highlightable"}
         style={{
           cursor: this.state.magnified ? 'zoom-out' : 'zoom-in',
         }}

@@ -25,7 +25,8 @@ export default class Archive extends React.Component {
       let locs = data.locations;
       if (isNaN(doc.id) || locs.length == 0) return;
       for (let locid of locs) {
-        if (isNaN(locid)) return;
+        if (isNaN(locid) || locid == this.props.currentData.lastUpdateTime)
+          return;
       }
       planets[doc.id] = doc.data();
     });
