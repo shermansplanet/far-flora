@@ -37,13 +37,20 @@ export default class BaseSite extends React.Component {
     }
 
     this.db = getFirestore();
+    this.lastChoice = null;
+    this.voteUpdated = false;
 
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.userUnsub = onSnapshot(doc(this.db, 'users', user.uid), (doc) => {
+          let userData = doc.data();
+          let thisChoice = userData.choice;
+          this.voteUpdated =
+            thisChoice != this.lastChoice && this.lastChoice != null;
+          this.lastChoice = thisChoice;
           this.setState({
-            user: { ...doc.data(), uid: user.uid },
+            user: { ...userData, uid: user.uid },
             loading: false,
             showLogin: false,
           });
@@ -76,7 +83,8 @@ export default class BaseSite extends React.Component {
     }
 
     let content = null;
-
+    let voteUpdated = this.voteUpdated;
+    this.voteUpdated = false;
     let tab = this.state.tab;
 
     if (this.state.showLogin) {
@@ -125,6 +133,11 @@ export default class BaseSite extends React.Component {
             Archive
           </button>
         </div>
+        {voteUpdated ? (
+          <div key={this.state.user.choice} className="announcement">
+            {this.state.user.choice == -1 ? 'VOTE CANCELED' : 'VOTE REGISTERED'}
+          </div>
+        ) : null}
         {content}
       </div>
     );

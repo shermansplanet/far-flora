@@ -294,3 +294,45 @@ button:active {
   font-weight: 300;
   color: #888;
 }
+
+@keyframes flicker {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px) scaleY(0);
+    background-position-x: -500px;
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(0px) scaleY(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(0px) scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(50px) scaleY(0);
+    background-position-x: 500px;
+  }
+}
+
+.announcement {
+  background-image: linear-gradient(to right, black, var(--dark), black);
+  background-repeat: no-repeat;
+  background-color: black;
+  color: white;
+  font-family: 'Share Tech Mono', monospace;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  margin-left: -95px;
+  z-index: 5;
+  font-size: 18pt;
+  padding: 4px 12px;
+  animation-name: flicker;
+  animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-delay: 0.2s;
+  overflow: hidden;
+  white-space: nowrap;
+}
