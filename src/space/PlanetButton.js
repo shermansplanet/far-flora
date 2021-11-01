@@ -1,7 +1,7 @@
 import React from 'react';
 import FirebaseImage from '../FirebaseImage';
 
-export default class FirebaseImage extends React.Component {
+export default class PlanetButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
