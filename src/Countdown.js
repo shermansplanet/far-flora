@@ -22,6 +22,15 @@ export default class Countdown extends React.Component {
     let hour = Math.floor(seconds / secondsPerHour);
     let last = this.props.currentData.lastUpdateTime;
     let shouldBeProcessing = hour == last;
+
+    if (shouldBeProcessing != this.props.currentData.processing) {
+      return (
+        <div className="countdown">
+          <div className="loader" />
+        </div>
+      );
+    }
+
     if (shouldBeProcessing) {
       seconds = (last + 1) * 60 * 60 - seconds;
     } else {
