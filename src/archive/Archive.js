@@ -45,7 +45,7 @@ export default class Archive extends React.Component {
       }
       archiveData[pid] = planetData;
     }
-    this.setState({ loading: false, archiveData });
+    this.setState({ loading: false, archiveData, idList });
   };
 
   renderPlanet = (id, data) => {
@@ -84,7 +84,7 @@ export default class Archive extends React.Component {
         </div>
       );
     let content = [];
-    for (let planetId in this.state.archiveData) {
+    for (let planetId of this.state.idList) {
       content.push(
         this.renderPlanet(planetId, this.state.archiveData[planetId])
       );
