@@ -26,8 +26,7 @@ export default class Archive extends React.Component {
       let locs = data.locations;
       if (isNaN(doc.id) || locs.length == 0) return;
       for (let locid of locs) {
-        if (isNaN(locid) || locid == this.props.currentData.lastUpdateTime)
-          return;
+        if (isNaN(locid)) return;
       }
       planets[doc.id] = doc.data();
       idList.push(doc.id);
@@ -39,6 +38,7 @@ export default class Archive extends React.Component {
       let planetData = {};
       for (let ii = 0; ii < planets[pid].locations.length; ii++) {
         let locid = planets[pid].locations[ii];
+        if (locid == this.props.currentData.lastUpdateTime) continue;
         const docRef = doc(this.db, 'locations', locid);
         const docSnap = await getDoc(docRef);
         planetData[locid] = { imageCount: docSnap.data().imageCount };
