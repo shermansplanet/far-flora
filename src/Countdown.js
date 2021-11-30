@@ -23,6 +23,20 @@ export default class Countdown extends React.Component {
     let last = this.props.currentData.lastUpdateTime;
     let shouldBeProcessing = hour == last;
 
+    if (last > 1000000000) {
+      return (
+        <div
+          className="countdown"
+          style={{ flexDirection: 'column', alignItems: 'center' }}
+        >
+          <div>CURRENTLY IN MANUAL MODE</div>
+          <div style={{ fontSize: '14pt' }}>
+            (I can't predict when the next update will be)
+          </div>
+        </div>
+      );
+    }
+
     if (shouldBeProcessing != this.props.currentData.processing) {
       return (
         <div className="countdown">
