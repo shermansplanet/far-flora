@@ -134,7 +134,7 @@ export default class BaseSite extends React.Component {
               paddingBottom: '0px',
               paddingTop: '33px',
             }}
-            onClick={() => this.setState({ tab: 'FEED', showLogin: false })}
+            onClick={() => window.open('https://twitter.com/FarFloraBot')}
           >
             <svg
               version="1.1"
