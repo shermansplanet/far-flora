@@ -173,7 +173,7 @@ export default class BaseSite extends React.Component {
             style={{
               paddingLeft: '8px',
               paddingRight: '5px',
-              paddingBottom: '0px',
+              paddingBottom: '5px',
               paddingTop: '33px',
             }}
             onClick={() => window.open('https://twitter.com/FarFloraBot')}
