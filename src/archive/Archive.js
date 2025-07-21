@@ -6,7 +6,9 @@ import {
   getFirestore,
   doc,
   getDoc,
+  deleteDoc,
 } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 export default class Archive extends React.Component {
   constructor(props) {
@@ -66,6 +68,18 @@ export default class Archive extends React.Component {
     }
     return (
       <div key={'planet_' + id} className="archiveRow">
+        {this.props.userId == 'tqfPrbXRBKSp7lhc4UI9SgOKHIy2' ? (
+          <button
+            onClick={async () => {
+              const deletion = await deleteDoc(doc(this.db, 'planets', id));
+              console.log(deletion);
+            }}
+          >
+            X
+          </button>
+        ) : (
+          ''
+        )}
         <FirebaseImage
           src={'planets/' + id + '/planet.png'}
           height={180}
